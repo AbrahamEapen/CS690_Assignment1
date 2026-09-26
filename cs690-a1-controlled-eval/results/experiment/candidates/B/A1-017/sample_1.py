@@ -1,0 +1,34 @@
+def is_palindrome_normalized(text):
+    left = 0
+    right = len(text) - 1
+
+    while left < right:
+        while left < right and not (
+            ("A" <= text[left] <= "Z")
+            or ("a" <= text[left] <= "z")
+            or ("0" <= text[left] <= "9")
+        ):
+            left += 1
+
+        while left < right and not (
+            ("A" <= text[right] <= "Z")
+            or ("a" <= text[right] <= "z")
+            or ("0" <= text[right] <= "9")
+        ):
+            right -= 1
+
+        left_char = text[left]
+        right_char = text[right]
+
+        if "A" <= left_char <= "Z":
+            left_char = chr(ord(left_char) + 32)
+        if "A" <= right_char <= "Z":
+            right_char = chr(ord(right_char) + 32)
+
+        if left_char != right_char:
+            return False
+
+        left += 1
+        right -= 1
+
+    return True
